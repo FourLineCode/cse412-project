@@ -12,10 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useAuth } from "../../stores/useAuth";
 
 export default function AdminSignInPage() {
   const toast = useToast();
   const router = useRouter();
+  const auth = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,11 +28,10 @@ export default function AdminSignInPage() {
     return !regex.test(email);
   }, [email]);
   const passwordError = useMemo(() => {
-    return password.length < 6 || password.length > 32;
+    return password.length < 4 || password.length > 32;
   }, [password]);
 
   const handleFormSubmit = async () => {
-    console.log({ email, password });
     if (emailError || passwordError) {
       return toast({
         title: "Invalid Email or Password",
@@ -42,8 +43,37 @@ export default function AdminSignInPage() {
 
     setLoading(true);
 
-    await new Promise((res) => setTimeout(res, 2000));
-    console.log({ email, password });
+    try {
+      const res = await fetch("/api/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        auth.setAuth(data.user, data.token);
+        router.push("/dashboard");
+
+        toast({
+          title: "Successfully signed in",
+          status: "success",
+          duration: 3000,
+          isClosable: false,
+        });
+      } else {
+        toast({
+          title: data.error,
+          status: "error",
+          duration: 3000,
+          isClosable: false,
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+    }
 
     setLoading(false);
   };

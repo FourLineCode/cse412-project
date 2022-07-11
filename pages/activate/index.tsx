@@ -24,11 +24,11 @@ export default function ActivatePage() {
 
   const error = useMemo(() => {
     return (
-      password.length < 6 ||
+      password.length < 4 ||
       password.length > 32 ||
-      tempPassword.length < 6 ||
+      tempPassword.length < 4 ||
       tempPassword.length > 32 ||
-      confirmPassword.length < 6 ||
+      confirmPassword.length < 4 ||
       confirmPassword.length > 32
     );
   }, [password]);

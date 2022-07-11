@@ -12,10 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useAuth } from "../../stores/useAuth";
 
 export default function StudentSignInPage() {
   const toast = useToast();
   const router = useRouter();
+  const auth = useAuth();
   const idRef = useRef<HTMLInputElement>(null);
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +28,7 @@ export default function StudentSignInPage() {
     return !regex.test(id);
   }, [id]);
   const passwordError = useMemo(() => {
-    return password.length < 6 || password.length > 32;
+    return password.length < 4 || password.length > 32;
   }, [password]);
 
   const formattedId = useMemo(() => {
@@ -49,8 +51,37 @@ export default function StudentSignInPage() {
 
     setLoading(true);
 
-    await new Promise((res) => setTimeout(res, 2000));
-    console.log({ id, password });
+    try {
+      const res = await fetch("/api/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, password }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        auth.setAuth(data.user, data.token);
+        router.push("/dashboard");
+
+        toast({
+          title: "Successfully signed in",
+          status: "success",
+          duration: 3000,
+          isClosable: false,
+        });
+      } else {
+        toast({
+          title: data.error,
+          status: "error",
+          duration: 3000,
+          isClosable: false,
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+    }
 
     setLoading(false);
   };
@@ -86,7 +117,7 @@ export default function StudentSignInPage() {
                 ref={idRef}
                 placeholder="2020-3-60-333"
                 value={formattedId}
-                onChange={(e) => setId(e.target.value)}
+                onChange={(e) => id.length < 13 && setId(e.target.value)}
                 onKeyDown={onKeyDownHandler}
               />
             </Box>
