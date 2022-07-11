@@ -55,7 +55,7 @@ export default function AdminSignInPage() {
 
       if (data.success) {
         auth.setAuth(data.user, data.token);
-        router.push("/dashboard");
+        router.push("/home");
 
         toast({
           title: "Successfully signed in",
@@ -91,8 +91,13 @@ export default function AdminSignInPage() {
   }, []);
 
   return (
-    <Center bgGradient="linear(to-b, gray.700, gray.900)" w="100vw" h="100vh">
-      <Box p="6" bg="gray.900" rounded="xl" maxW="md" w="100%">
+    <Center
+      bg="white"
+      _dark={{ bgGradient: "linear(to-b, gray.700, gray.900)" }}
+      w="100vw"
+      h="100vh"
+    >
+      <Box p="6" bg="gray.200" _dark={{ bg: "gray.900" }} rounded="xl" maxW="md" w="100%">
         <Text pb="3" fontSize="32" fontWeight="extrabold" textAlign="center">
           Sign In
         </Text>

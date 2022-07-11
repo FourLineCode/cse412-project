@@ -2,7 +2,8 @@ import { verify } from "argon2";
 import { Document, WithId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../server/mongodb/client";
-import { generateToken, UserRole } from "../../server/utils/token";
+import { UserRole } from "../../server/types/User";
+import { generateToken } from "../../server/utils/token";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") return;

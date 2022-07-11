@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
+import { UserRole } from "../types/User";
 
 const SECRET = process.env.JWT_SECRET ?? "jwt-secret";
-
-export type UserRole = "student" | "faculty" | "admin";
 
 export interface JWTPayload {
   userId: ObjectId;

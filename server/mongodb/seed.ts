@@ -11,19 +11,19 @@ async function seed() {
 
   await users.insertMany([
     {
-      username: "admin",
+      username: "Admin User",
       email: "root@root.com",
       password: passwordHash,
       role: "admin",
     },
     {
-      username: "faculty",
+      username: "Faculty User",
       email: "faculty@root.com",
       password: passwordHash,
       role: "faculty",
     },
     {
-      username: "student",
+      username: "Student User",
       sid: "2222-2-22-222",
       password: passwordHash,
       role: "student",

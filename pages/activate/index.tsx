@@ -72,8 +72,13 @@ export default function ActivatePage() {
   }, []);
 
   return (
-    <Center bgGradient="linear(to-b, gray.700, gray.900)" w="100vw" h="100vh">
-      <Box p="6" bg="gray.900" rounded="xl" maxW="md" w="100%">
+    <Center
+      bg="white"
+      _dark={{ bgGradient: "linear(to-b, gray.700, gray.900)" }}
+      w="100vw"
+      h="100vh"
+    >
+      <Box p="6" bg="gray.200" _dark={{ bg: "gray.900" }} rounded="xl" maxW="md" w="100%">
         <Text pb="3" fontSize="32" fontWeight="extrabold" textAlign="center">
           Activate Account
         </Text>
@@ -90,7 +95,7 @@ export default function ActivatePage() {
                 ref={idRef}
                 placeholder="2020-3-60-333"
                 value={formattedId}
-                onChange={(e) => setId(e.target.value)}
+                onChange={(e) => e.target.value.length <= 13 && setId(e.target.value)}
                 onKeyDown={onKeyDownHandler}
               />
             </Box>

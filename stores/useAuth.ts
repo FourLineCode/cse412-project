@@ -1,12 +1,6 @@
-import { Document, ObjectId, WithId } from "mongodb";
+import { ObjectId } from "mongodb";
 import create from "zustand";
-import { UserRole } from "../server/utils/token";
-
-export interface User extends WithId<Document> {
-  username: string;
-  email: string;
-  role: UserRole;
-}
+import { User } from "../server/types/User";
 
 interface AuthState {
   user: User | null;
@@ -14,6 +8,7 @@ interface AuthState {
   token: string | null;
   authorized: boolean;
   setAuth(user: User, token: string): void;
+  signOut(): void;
 }
 
 export const useAuth = create<AuthState>((set) => ({
@@ -22,4 +17,5 @@ export const useAuth = create<AuthState>((set) => ({
   token: null,
   authorized: false,
   setAuth: (user, token) => set({ authorized: true, userId: user._id, user, token }),
+  signOut: () => set({ user: null, userId: null, token: null, authorized: false }),
 }));
