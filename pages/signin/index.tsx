@@ -70,7 +70,7 @@ export default function StudentSignInPage() {
   return (
     <Center bgGradient="linear(to-b, gray.700, gray.900)" w="100vw" h="100vh">
       <Box p="6" bg="gray.900" rounded="xl">
-        <Text py="3" fontSize="32" fontWeight="extrabold" textAlign="center">
+        <Text pb="3" fontSize="32" fontWeight="extrabold" textAlign="center">
           Sign In
         </Text>
         <FormControl>
