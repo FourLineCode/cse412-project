@@ -15,6 +15,8 @@ export default class Document extends NextDocument {
             }
             rel="stylesheet"
           />
+          <link rel="shortcut icon" href="/icon.png" />
+          <title>Student Advising Portal</title>
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
