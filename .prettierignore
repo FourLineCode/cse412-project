@@ -1,0 +1,8 @@
+node_modules
+build
+coverage
+.sewing-kit
+*.svg
+.next
+sessions.json
+theme-extension/assets/bundle.js
