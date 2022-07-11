@@ -69,13 +69,13 @@ export default function StudentSignInPage() {
 
   return (
     <Center bgGradient="linear(to-b, gray.700, gray.900)" w="100vw" h="100vh">
-      <Box p="6" bg="gray.900" rounded="xl">
+      <Box p="6" bg="gray.900" rounded="xl" maxW="md" w="100%">
         <Text pb="3" fontSize="32" fontWeight="extrabold" textAlign="center">
           Sign In
         </Text>
         <FormControl>
           <VStack spacing="4">
-            <Box>
+            <Box w="100%">
               <FormLabel htmlFor="id">Student ID</FormLabel>
               <Input
                 id="id"
@@ -90,7 +90,7 @@ export default function StudentSignInPage() {
                 onKeyDown={onKeyDownHandler}
               />
             </Box>
-            <Box>
+            <Box w="100%">
               <FormLabel htmlFor="password">Password</FormLabel>
               <Input
                 id="password"

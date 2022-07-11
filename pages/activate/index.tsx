@@ -11,14 +11,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export default function ActivatePage() {
   const toast = useToast();
-  const router = useRouter();
-  const tempRef = useRef<HTMLInputElement>(null);
-  const [email, setEmail] = useState("");
+  const idRef = useRef<HTMLInputElement>(null);
+  const [id, setId] = useState("");
   const [tempPassword, setTempPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,6 +32,14 @@ export default function ActivatePage() {
       confirmPassword.length > 32
     );
   }, [password]);
+
+  const formattedId = useMemo(() => {
+    const arr = id.split("").filter((char) => char !== "-");
+    const parts = [arr.slice(0, 4), arr.slice(4, 5), arr.slice(5, 7), arr.slice(7, 10)].filter(
+      (part) => part.length > 0
+    );
+    return parts.map((part) => part.join("")).join("-");
+  }, [id]);
 
   const handleFormSubmit = async () => {
     if (error) {
@@ -60,32 +66,48 @@ export default function ActivatePage() {
   };
 
   useEffect(() => {
-    if (tempRef.current) {
-      tempRef.current.focus();
+    if (idRef.current) {
+      idRef.current.focus();
     }
   }, []);
 
   return (
     <Center bgGradient="linear(to-b, gray.700, gray.900)" w="100vw" h="100vh">
-      <Box p="6" bg="gray.900" rounded="xl">
+      <Box p="6" bg="gray.900" rounded="xl" maxW="md" w="100%">
         <Text pb="3" fontSize="32" fontWeight="extrabold" textAlign="center">
           Activate Account
         </Text>
         <FormControl>
-          <Box>
-            <FormLabel htmlFor="tempPassword">Temporary Password</FormLabel>
-            <Input
-              id="tempPassword"
-              name="tempPassword"
-              type="password"
-              isRequired
-              ref={tempRef}
-              placeholder="Temporary Password..."
-              value={tempPassword}
-              onChange={(e) => setTempPassword(e.target.value)}
-              onKeyDown={onKeyDownHandler}
-            />
-          </Box>
+          <VStack spacing="4">
+            <Box w="100%">
+              <FormLabel htmlFor="id">Student ID</FormLabel>
+              <Input
+                id="id"
+                name="id"
+                type="text"
+                isRequired
+                autoFocus
+                ref={idRef}
+                placeholder="2020-3-60-333"
+                value={formattedId}
+                onChange={(e) => setId(e.target.value)}
+                onKeyDown={onKeyDownHandler}
+              />
+            </Box>
+            <Box w="100%">
+              <FormLabel htmlFor="tempPassword">Temporary Password</FormLabel>
+              <Input
+                id="tempPassword"
+                name="tempPassword"
+                type="password"
+                isRequired
+                placeholder="Temporary Password..."
+                value={tempPassword}
+                onChange={(e) => setTempPassword(e.target.value)}
+                onKeyDown={onKeyDownHandler}
+              />
+            </Box>
+          </VStack>
           <HStack spacing="3" py="3">
             <Box h="0.5" bg="gray.500" w="100%" />
             <Text textAlign="center" w="100%" fontSize="12" fontWeight="bold" color="gray.500">
@@ -94,7 +116,7 @@ export default function ActivatePage() {
             <Box h="0.5" bg="gray.500" w="100%" />
           </HStack>
           <VStack spacing="4">
-            <Box>
+            <Box w="100%">
               <FormLabel htmlFor="newPassword">New Password</FormLabel>
               <Input
                 id="newPassword"
@@ -107,7 +129,7 @@ export default function ActivatePage() {
                 onKeyDown={onKeyDownHandler}
               />
             </Box>
-            <Box>
+            <Box w="100%">
               <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
               <Input
                 id="confirmPassword"
