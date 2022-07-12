@@ -28,7 +28,7 @@ export function Navbar() {
       width="100%"
       bg="gray.300"
       h="16"
-      px="3"
+      px="5"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
@@ -36,7 +36,7 @@ export function Navbar() {
     >
       <NavMenu />
       <HStack>
-        <VStack spacing="1">
+        <VStack spacing="1" align="end">
           <Text fontWeight="semibold">{user?.username}</Text>
           <Box bg={badgeColor} py="0.5" px="1.5" rounded="full">
             <Text fontSize="10" fontWeight="bold">
