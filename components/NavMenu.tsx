@@ -75,7 +75,7 @@ export function NavMenu() {
                   <NavMenuItem route="/faculty/student" label="Student Profile" icon={Student} />
                   <NavMenuItem route="/faculty/grade" label="Student Grade Report" icon={Exam} />
                   <NavMenuItem route="/calendar" label="Academic Calendar" icon={Calendar} />
-                  <NavMenuItem route="/faculty/publish" label="Publish Result" icon={Upload} />
+                  <NavMenuItem route="/faculty/submit" label="Submit Result" icon={Upload} />
                 </>
               ) : user?.role === "student" ? (
                 <>
