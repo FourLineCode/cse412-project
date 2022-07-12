@@ -118,8 +118,8 @@ function NavMenuItem({ route, icon: IconComponent, label }: NavMenuItemProps) {
         w="100%"
         p="4"
         bg="gray.300"
-        _dark={{ bg: "gray.600" }}
-        _hover={{ bg: "gray.500" }}
+        _hover={{ bg: "gray.400" }}
+        _dark={{ bg: "gray.600", _hover: { bg: "gray.500" } }}
         rounded="lg"
       >
         <IconComponent weight="fill" size="28" />

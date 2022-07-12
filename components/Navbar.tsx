@@ -53,7 +53,22 @@ export function Navbar() {
             />
           </MenuButton>
           <MenuList>
-            <MenuItem icon={<User weight="fill" />}>View Profile</MenuItem>
+            {user?.role !== "admin" && (
+              <MenuItem
+                icon={<User weight="fill" />}
+                onClick={() => {
+                  router.push(
+                    user?.role === "faculty"
+                      ? "/faculty/profile"
+                      : user?.role === "student"
+                      ? "/student/profile"
+                      : "/home"
+                  );
+                }}
+              >
+                View Profile
+              </MenuItem>
+            )}
             <MenuItem
               icon={colorMode === "light" ? <Moon weight="fill" /> : <Sun weight="fill" />}
               onClick={toggleColorMode}
