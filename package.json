@@ -11,28 +11,28 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.2.3",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
+    "@chakra-ui/react": "^2.2.4",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "argon2": "^0.28.7",
-    "framer-motion": "^6",
+    "framer-motion": "^6.5.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^4.7.0",
-    "next": "12.2.2",
+    "mongodb": "^4.8.0",
+    "next": "12.2.3",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "zustand": "4.0.0-rc.1"
+    "zustand": "4.0.0-rc.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.6",
+    "@babel/core": "^7.18.9",
     "@types/jsonwebtoken": "^8.5.8",
-    "@types/node": "18.0.3",
+    "@types/node": "18.0.6",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "dotenv": "^16.0.1",
     "prettier": "^2.7.1",
-    "ts-node": "^10.8.2",
+    "ts-node": "^10.9.1",
     "typescript": "4.7.4"
   }
 }
