@@ -141,12 +141,10 @@ export default function StudentSignInPage() {
             </Box>
             <Button
               type="submit"
-              bg="green.500"
-              _hover={{ bg: "green.600" }}
-              _active={{ bg: "green.700" }}
               w="100%"
               fontSize="16"
               fontWeight="bold"
+              colorScheme="green"
               isLoading={loading}
               onClick={handleFormSubmit}
             >
@@ -163,9 +161,7 @@ export default function StudentSignInPage() {
         </HStack>
         <VStack spacing="3">
           <Button
-            bg="blue.500"
-            _hover={{ bg: "blue.600" }}
-            _active={{ bg: "blue.700" }}
+            colorScheme="blue"
             w="100%"
             fontSize="16"
             fontWeight="bold"
@@ -174,9 +170,7 @@ export default function StudentSignInPage() {
             Activate Account
           </Button>
           <Button
-            bg="red.500"
-            _hover={{ bg: "red.600" }}
-            _active={{ bg: "red.700" }}
+            colorScheme="red"
             w="100%"
             fontSize="16"
             fontWeight="bold"

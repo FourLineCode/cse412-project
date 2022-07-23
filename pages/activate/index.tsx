@@ -149,12 +149,10 @@ export default function ActivatePage() {
             </Box>
             <Button
               type="submit"
-              bg="blue.500"
-              _hover={{ bg: "blue.600" }}
-              _active={{ bg: "blue.700" }}
               w="100%"
               fontSize="16"
               fontWeight="bold"
+              colorScheme="blue"
               isLoading={loading}
               onClick={handleFormSubmit}
             >

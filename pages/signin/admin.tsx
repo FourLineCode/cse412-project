@@ -132,9 +132,7 @@ export default function AdminSignInPage() {
             </Box>
             <Button
               type="submit"
-              bg="red.500"
-              _hover={{ bg: "red.600" }}
-              _active={{ bg: "red.700" }}
+              colorScheme="red"
               w="100%"
               fontSize="16"
               fontWeight="bold"
@@ -154,12 +152,10 @@ export default function AdminSignInPage() {
         </HStack>
         <VStack spacing="3">
           <Button
-            bg="green.500"
-            _hover={{ bg: "green.600" }}
-            _active={{ bg: "green.700" }}
             w="100%"
             fontSize="16"
             fontWeight="bold"
+            colorScheme="green"
             onClick={() => router.push("/signin")}
           >
             Student Panel
