@@ -55,7 +55,7 @@ export default function StudentCalculatorPage() {
           <Box>
             <HStack>
               <Text w="100%" fontWeight="semibold" textAlign="center">
-                Course Code (Optional)
+                Course Code (Optional )
               </Text>
               <Text w="100%" fontWeight="semibold" textAlign="center">
                 Credit
@@ -97,7 +97,7 @@ export default function StudentCalculatorPage() {
                     )
                   }
                 >
-                  <option value="4.00">A (4.00)</option>
+                  <option value="4.00">A+/A (4.00)</option>
                   <option value="3.70">A- (3.70)</option>
                   <option value="3.30">B+ (3.30)</option>
                   <option value="3.00">B (3.00)</option>
