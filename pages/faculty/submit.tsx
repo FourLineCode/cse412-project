@@ -1,4 +1,5 @@
-import { Center, Text } from "@chakra-ui/react";
+import { Center, Text, VStack } from "@chakra-ui/react";
+import ClockAfternoon from "phosphor-react/dist/icons/ClockAfternoon";
 import { AuthProvider } from "../../components/AuthProvider";
 import { Layout } from "../../components/Layout";
 
@@ -7,9 +8,15 @@ export default function FacultySubmitResultPage() {
     <AuthProvider role="faculty">
       <Layout>
         <Center w="100%" h="100%" py="20">
-          <Text fontSize="48" fontWeight="extrabold">
-            Faculty Submit Result
-          </Text>
+          <VStack>
+            <ClockAfternoon size={100} color="gray" />
+            <Text fontSize="32" fontWeight="extrabold" color="gray">
+              Submit Result
+            </Text>
+            <Text fontSize="24" fontWeight="extrabold" color="gray">
+              (Coming Soon)
+            </Text>
+          </VStack>
         </Center>
       </Layout>
     </AuthProvider>

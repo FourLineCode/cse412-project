@@ -1,12 +1,14 @@
 import { verify } from "argon2";
 import { Document, WithId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { db } from "../../server/mongodb/client";
+import { client, db } from "../../server/mongodb/client";
 import { UserRole } from "../../server/types/User";
 import { generateToken } from "../../server/utils/token";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") return;
+
+  await client.connect();
 
   const { email, id, password } = req.body;
 
@@ -14,9 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const users = db.collection("users");
   if (email) {
-    user = await users.findOne({ email });
+    user = await users.findOne({ email, activated: true });
   } else if (id) {
-    user = await users.findOne({ sid: id });
+    user = await users.findOne({ sid: id, activated: true });
   }
 
   if (!user) return res.status(404).json({ success: false, error: "User not found" });

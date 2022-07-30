@@ -11,10 +11,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export default function ActivatePage() {
   const toast = useToast();
+  const router = useRouter();
   const idRef = useRef<HTMLInputElement>(null);
   const [id, setId] = useState("");
   const [tempPassword, setTempPassword] = useState("");
@@ -24,14 +26,16 @@ export default function ActivatePage() {
 
   const error = useMemo(() => {
     return (
-      password.length < 4 ||
-      password.length > 32 ||
-      tempPassword.length < 4 ||
-      tempPassword.length > 32 ||
-      confirmPassword.length < 4 ||
-      confirmPassword.length > 32
+      !(password.trim() && tempPassword.trim() && confirmPassword.trim()) ||
+      password.trim().length < 4 ||
+      password.trim().length > 32 ||
+      tempPassword.trim().length < 4 ||
+      tempPassword.trim().length > 32 ||
+      confirmPassword.trim().length < 4 ||
+      confirmPassword.trim().length > 32 ||
+      password.trim() !== confirmPassword.trim()
     );
-  }, [password]);
+  }, [password, confirmPassword, tempPassword]);
 
   const formattedId = useMemo(() => {
     const arr = id.split("").filter((char) => char !== "-");
@@ -53,8 +57,45 @@ export default function ActivatePage() {
 
     setLoading(true);
 
-    await new Promise((res) => setTimeout(res, 2000));
-    console.log({ tempPassword, password, confirmPassword });
+    try {
+      const res = await fetch("/api/activate", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          oldPassword: tempPassword.trim(),
+          newPassword: password.trim(),
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        toast({
+          title: "Successfully activated account",
+          status: "success",
+          duration: 3000,
+          isClosable: false,
+        });
+
+        router.push("/signin");
+      } else {
+        toast({
+          title: "Couldn't activate account",
+          status: "error",
+          duration: 3000,
+          isClosable: false,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        duration: 3000,
+        isClosable: false,
+      });
+    }
 
     setLoading(false);
   };
