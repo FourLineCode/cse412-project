@@ -1,5 +1,5 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
-import ClockAfternoon from "phosphor-react/dist/icons/ClockAfternoon";
+import { ClockAfternoon } from "phosphor-react";
 import { AuthProvider } from "../../components/AuthProvider";
 import { Layout } from "../../components/Layout";
 
