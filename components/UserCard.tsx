@@ -104,8 +104,8 @@ export function UserCard({ user, getUsers }: { user: User; getUsers: () => Promi
           role: userRole,
           activated: userActivated,
           department: userDepartment,
-          completedCredit: userCredit,
-          grade: userGrade,
+          completedCredit: Number(userCredit),
+          grade: Number(userGrade),
         }),
       });
       const data = await res.json();

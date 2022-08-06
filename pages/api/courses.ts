@@ -12,18 +12,61 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.status(200).json({ courses });
   } else if (req.method === "POST") {
-    const {} = req.body;
+    const {
+      code,
+      title,
+      credit,
+      department,
+      section,
+      room,
+      facultyUserId,
+      maxSeats,
+      takenSeats,
+      creditRequired,
+      prerequisite,
+      classSlot,
+      classStart,
+      classEnd,
+      hasLab,
+      labSlot,
+      labStart,
+      labEnd,
+    } = req.body;
 
-    // TODO: add course
-    const course = {};
+    const course = {
+      code,
+      title,
+      credit,
+      department,
+      section,
+      room,
+      facultyUserId: new ObjectId(facultyUserId),
+      maxSeats,
+      takenSeats,
+      creditRequired,
+      prerequisite,
+      classSlot,
+      classStart,
+      classEnd,
+      hasLab,
+      labSlot,
+      labStart,
+      labEnd,
+    };
 
     await coursesColl.insertOne(course);
 
     res.status(200).json({ success: true });
   } else if (req.method === "PUT") {
-    const {} = req.body;
+    const { id } = req.body;
+    const _id = new ObjectId(id);
 
-    // TODO: update course
+    const user = await coursesColl.findOne({ _id });
+    if (!user) return res.status(404).json({ success: false, error: "Course not found" });
+
+    delete req.body["id"];
+    req.body.facultyUserId = new ObjectId(req.body.facultyUserId);
+    await coursesColl.updateOne({ _id }, { $set: req.body });
 
     res.status(200).json({ success: true });
   } else if (req.method === "DELETE") {
@@ -37,6 +80,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.status(200).json({ success: true });
   }
-
-  client.close();
 }
