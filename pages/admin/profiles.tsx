@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Center,
@@ -24,6 +23,7 @@ import { MagnifyingGlass, UserPlus } from "phosphor-react";
 import { useEffect, useMemo, useState } from "react";
 import { AuthProvider } from "../../components/AuthProvider";
 import { Layout } from "../../components/Layout";
+import { UserCard } from "../../components/UserCard";
 import { User, UserRole } from "../../server/types/User";
 
 export default function AdminProfilesPage() {
@@ -34,6 +34,7 @@ export default function AdminProfilesPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userRole, setUserRole] = useState<UserRole>("student");
   const [username, setUsername] = useState("");
+  const [userDepartment, setUserDepartment] = useState("cse");
   const [password, setPassword] = useState("123456");
   const [userId, setUserId] = useState("");
   const [addLoading, setAddLoading] = useState(false);
@@ -82,6 +83,7 @@ export default function AdminProfilesPage() {
           id: userId.trim(),
           username: username.trim(),
           password: password.trim(),
+          ...(userRole === "student" ? { department: userDepartment } : {}),
         }),
       });
       const data = await res.json();
@@ -91,6 +93,7 @@ export default function AdminProfilesPage() {
         onClose();
 
         setUserRole("student");
+        setUserDepartment("cse");
         setUsername("");
         setUserId("");
         setPassword("123456");
@@ -109,6 +112,7 @@ export default function AdminProfilesPage() {
         duration: 3000,
         isClosable: false,
       });
+      setAddLoading(false);
     }
 
     setAddLoading(false);
@@ -164,6 +168,25 @@ export default function AdminProfilesPage() {
                     <option value="faculty">Faculty</option>
                     <option value="student">Student</option>
                   </Select>
+                  {userRole === "student" && (
+                    <>
+                      <FormLabel mt="2" htmlFor="department">
+                        Department
+                      </FormLabel>
+                      <Select
+                        name="department"
+                        value={userDepartment}
+                        onChange={(e) => setUserDepartment(e.target.value)}
+                      >
+                        <option value="cse">CSE</option>
+                        <option value="bba">BBA</option>
+                        <option value="eng">English</option>
+                        <option value="mps">Mathematical & Physical Science</option>
+                        <option value="pharmacy">Pharmacy</option>
+                        <option value="civil">Civil Engineering</option>
+                      </Select>
+                    </>
+                  )}
                   <FormLabel mt="2" htmlFor="id">
                     User ID/Email
                   </FormLabel>
@@ -210,23 +233,7 @@ export default function AdminProfilesPage() {
               </Center>
             ) : (
               filteredUsers.map((user) => (
-                <HStack
-                  spacing="4"
-                  bg="gray.800"
-                  rounded="md"
-                  cursor="pointer"
-                  _hover={{ bg: "gray.700" }}
-                  px="4"
-                  py="2"
-                >
-                  <Avatar name={user.username} />
-                  <Stack spacing="0">
-                    <Text fontSize="16">{user.username}</Text>
-                    <Text fontSize="12" color="gray.400">
-                      {user.role.toUpperCase()}
-                    </Text>
-                  </Stack>
-                </HStack>
+                <UserCard user={user} getUsers={getUsers} key={user._id} />
               ))
             )}
           </Stack>

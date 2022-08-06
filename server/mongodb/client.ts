@@ -9,4 +9,4 @@ if (!uri) {
 }
 
 export const client = new MongoClient(uri);
-export const db = client.db("student-advising");
+export const db = client.db("advising");
