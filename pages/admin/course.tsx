@@ -191,7 +191,7 @@ export default function AdminCoursesPage() {
             <Input
               w="100%"
               value={searchTerm}
-              placeholder="Search Users"
+              placeholder="Search Courses"
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <Button leftIcon={<MagnifyingGlass weight="fill" />} colorScheme="blue" minW="120">
@@ -211,7 +211,7 @@ export default function AdminCoursesPage() {
                 <ModalHeader textAlign="center">Add Course</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <HStack spacing={12} align="flex-start">
+                  <HStack spacing={6} align="flex-start">
                     <Box w="5xl">
                       <FormLabel htmlFor="code">Course Code</FormLabel>
                       <Input
@@ -373,11 +373,11 @@ export default function AdminCoursesPage() {
                         <option value="4:50 - 6:20">4:50 - 6:20</option>
                       </Select>
                       <Checkbox
-                        mt={2}
+                        mt={8}
                         defaultChecked={courseHasLab}
                         onChange={(e) => setCourseHasLab(e.target.checked)}
                       >
-                        Course has lab
+                        This course has lab
                       </Checkbox>
                       {courseHasLab && (
                         <>

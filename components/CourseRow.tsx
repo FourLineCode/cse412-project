@@ -195,7 +195,7 @@ export function CourseRow({
               <ModalHeader textAlign="center">Update Course</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <HStack spacing={12} align="flex-start">
+                <HStack spacing={6} align="flex-start">
                   <Box w="5xl">
                     <FormLabel htmlFor="code">Course Code</FormLabel>
                     <Input
@@ -360,11 +360,11 @@ export function CourseRow({
                       <option value="4:50 - 6:20">4:50 - 6:20</option>
                     </Select>
                     <Checkbox
-                      mt={2}
+                      mt={8}
                       defaultChecked={courseHasLab}
                       onChange={(e) => setCourseHasLab(e.target.checked)}
                     >
-                      Course has lab
+                      This course has lab
                     </Checkbox>
                     {courseHasLab && (
                       <>
@@ -423,7 +423,7 @@ export function CourseRow({
             <AlertDialogOverlay>
               <AlertDialogContent>
                 <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                  Delete User
+                  Delete Course
                 </AlertDialogHeader>
                 <AlertDialogBody>
                   Are you sure? You can't undo this action afterwards.

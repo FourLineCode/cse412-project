@@ -26,7 +26,7 @@ import { Layout } from "../../components/Layout";
 import { UserCard } from "../../components/UserCard";
 import { User, UserRole } from "../../server/types/User";
 
-export default function AdminProfilesPage() {
+export default function AdminUsersPage() {
   const toast = useToast();
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState<User[]>([]);

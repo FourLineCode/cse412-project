@@ -17,7 +17,6 @@ import {
   Calculator,
   Calendar,
   CalendarCheck,
-  CalendarPlus,
   Clock,
   Exam,
   FolderSimplePlus,
@@ -65,9 +64,8 @@ export function NavMenu() {
                     label="Manage Courses"
                     icon={FolderSimplePlus}
                   />
-                  <NavMenuItem route="/admin/profiles" label="Manage Profiles" icon={UserGear} />
+                  <NavMenuItem route="/admin/users" label="Manage Users" icon={UserGear} />
                   <NavMenuItem route="/admin/schedule" label="Schedule Advising" icon={Clock} />
-                  <NavMenuItem route="/admin/calendar" label="Edit Calendar" icon={CalendarPlus} />
                 </>
               ) : user?.role === "faculty" ? (
                 <>
