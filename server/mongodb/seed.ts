@@ -34,7 +34,7 @@ async function seed() {
       role: "student",
       activated: true,
       department: "cse",
-      completedCredit: 35,
+      completedCredit: 140,
       grade: 4.0,
     },
     {

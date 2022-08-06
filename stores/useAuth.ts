@@ -1,10 +1,9 @@
-import { ObjectId } from "mongodb";
 import create from "zustand";
 import { User } from "../server/types/User";
 
 interface AuthState {
   user: User | null;
-  userId: ObjectId | null;
+  userId: string | null;
   token: string | null;
   authorized: boolean;
   setAuth(user: User, token: string): void;
