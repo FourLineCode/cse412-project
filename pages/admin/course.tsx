@@ -86,7 +86,7 @@ export default function AdminCoursesPage() {
   const filteredCourses = useMemo(() => {
     return courses
       .filter((course) => JSON.stringify(course).toLowerCase().includes(searchTerm.toLowerCase()))
-      .sort((a, b) => (a.code > b.code ? 1 : a.code < b.code ? -1 : 0));
+      .sort((a, b) => (a.code > b.code ? 1 : a.code < b.code ? -1 : a.section - b.section));
   }, [searchTerm, courses]);
 
   const addCourse = async () => {
@@ -302,9 +302,9 @@ export default function AdminCoursesPage() {
                         onChange={(e) => setCoursePrereq(e.target.value)}
                       >
                         <option value="none">None</option>
-                        {courses.map((crs) => (
-                          <option value={crs.code} key={crs._id}>
-                            {crs.code}
+                        {[...new Set(courses.map(({ code }) => code))].map((code) => (
+                          <option value={code} key={code}>
+                            {code}
                           </option>
                         ))}
                       </Select>

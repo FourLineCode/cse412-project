@@ -286,14 +286,11 @@ export function CourseRow({
                       onChange={(e) => setCoursePrereq(e.target.value)}
                     >
                       <option value="none">None</option>
-                      {allCourses.map(
-                        (crs) =>
-                          crs._id !== course._id && (
-                            <option value={crs.code} key={crs._id}>
-                              {crs.code}
-                            </option>
-                          )
-                      )}
+                      {[...new Set(allCourses.map(({ code }) => code))].map((code) => (
+                        <option value={code} key={code}>
+                          {code}
+                        </option>
+                      ))}
                     </Select>
                   </Box>
                   <Box w="5xl">
