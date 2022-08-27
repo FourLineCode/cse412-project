@@ -8,17 +8,18 @@ import {
   Tbody,
   Td,
   Text,
-  Tr,
+  Tr
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { AuthProvider } from "../../components/AuthProvider";
-import { Layout } from "../../components/Layout";
-import { DepartmentCode, DepartmentMap } from "../../server/types/Department";
-import { User } from "../../server/types/User";
-import { useAuth } from "../../stores/useAuth";
+import { AuthProvider } from "../../../components/AuthProvider";
+import { Layout } from "../../../components/Layout";
+import { DepartmentCode, DepartmentMap } from "../../../server/types/Department";
+import { User } from "../../../server/types/User";
 
 export default function StudentProfilePage() {
-  const { userId } = useAuth();
+  const router = useRouter();
+  const userId = router.query.id as string;
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
 

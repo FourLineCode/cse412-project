@@ -1,7 +1,7 @@
 import { hash } from "argon2";
 import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { client, db } from "../../server/mongodb/client";
+import { client, db } from "../../../server/mongodb/client";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const usersColl = db.collection("users");
