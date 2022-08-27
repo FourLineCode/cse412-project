@@ -9,6 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === "GET") {
     const courses = await coursesColl.find().toArray();
 
+    // TODO: filter by student info
+
     res.status(200).json({ courses });
   }
 }

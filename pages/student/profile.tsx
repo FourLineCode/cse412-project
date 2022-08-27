@@ -66,7 +66,7 @@ export default function StudentProfilePage() {
                 <Box mt="8" mx={{ base: "auto", lg: "none" }}>
                   <Avatar name={user.username} w="32" h="32" />
                 </Box>
-                <Box ml={{ base: "0", lg: "8" }} w="100%" fontSize="18" fontStyle="semibold">
+                <Box ml={{ base: "0", lg: "8" }} w="100%" fontSize="18" fontWeight="semibold">
                   <TableContainer>
                     <Table variant="unstyled">
                       <Tbody>

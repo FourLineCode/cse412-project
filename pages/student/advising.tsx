@@ -5,6 +5,7 @@ import {
   GridItem,
   Spinner,
   Table,
+  TableCaption,
   TableContainer,
   Tbody,
   Text,
@@ -14,15 +15,18 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AdvisingCourseRow } from "../../components/AdvisingCourseRow";
+import { AdvisingRow } from "../../components/AdvisingRow";
 import { AuthProvider } from "../../components/AuthProvider";
 import { Layout } from "../../components/Layout";
-import { Course } from "../../server/types/Course";
+import { Advising, Course } from "../../server/types/Course";
 import { useAuth } from "../../stores/useAuth";
 
 export default function StudentAdvisingPage() {
   const { user } = useAuth();
   const [recommednedCourses, setRecommednedCourses] = useState<Course[]>([]);
+  const [advisings, setAdvisings] = useState<Advising[]>([]);
   const [loading, setLoading] = useState(false);
+  const [advisingLoading, setAdvisingLoading] = useState(false);
   const [adding, setAdding] = useState(false);
 
   const getRecommendedCourses = async () => {
@@ -33,17 +37,31 @@ export default function StudentAdvisingPage() {
 
     if (data.courses) {
       setRecommednedCourses(
-        (data.courses as Course[]).sort((a, b) =>
-          a.code > b.code ? 1 : a.code < b.code ? -1 : a.section - b.section
-        )
+        (data.courses as Course[]).sort((a, b) => a.code.localeCompare(b.code))
       );
     }
 
     setLoading(false);
   };
 
+  const getAdvisings = async () => {
+    setAdvisingLoading(true);
+
+    const res = await fetch(`/api/advising?id=${encodeURIComponent(user?._id ?? "")}`);
+    const data = await res.json();
+
+    if (data.advisings) {
+      setAdvisings(
+        (data.advisings as Advising[]).sort((a, b) => a.course.code.localeCompare(b.course.code))
+      );
+    }
+
+    setAdvisingLoading(false);
+  };
+
   useEffect(() => {
     getRecommendedCourses();
+    getAdvisings();
   }, []);
 
   return (
@@ -53,7 +71,7 @@ export default function StudentAdvisingPage() {
           <GridItem
             p="4"
             w="100%"
-            colSpan={3}
+            colSpan={{ base: 5, lg: 3 }}
             rounded="lg"
             bg="gray.300"
             _dark={{ bg: "gray.900" }}
@@ -67,13 +85,13 @@ export default function StudentAdvisingPage() {
               </Center>
             ) : (
               <TableContainer>
-                <Table variant="simple">
+                <Table variant="simple" size="sm">
                   <Thead>
                     <Tr>
                       <Th>Code</Th>
                       <Th isNumeric>Section</Th>
                       <Th isNumeric>Credit</Th>
-                      <Th isNumeric>Room</Th>
+                      {/* <Th isNumeric>Room</Th> */}
                       <Th>Timings</Th>
                       <Th>Seats</Th>
                       <Th>Actions</Th>
@@ -81,14 +99,20 @@ export default function StudentAdvisingPage() {
                   </Thead>
                   <Tbody>
                     {recommednedCourses.map((course) => (
-                      <AdvisingCourseRow course={course} adding={adding} setAdding={setAdding} />
+                      <AdvisingCourseRow
+                        course={course}
+                        adding={adding}
+                        setAdding={setAdding}
+                        getCourses={getRecommendedCourses}
+                        getAdvisings={getAdvisings}
+                      />
                     ))}
                   </Tbody>
                 </Table>
               </TableContainer>
             )}
           </GridItem>
-          <GridItem colSpan={2}>
+          <GridItem colSpan={{ base: 5, lg: 2 }}>
             <Box
               p="4"
               top="4"
@@ -101,21 +125,41 @@ export default function StudentAdvisingPage() {
               <Text textAlign="center" fontSize="20" mb="4" fontWeight="bold">
                 Advised Courses
               </Text>
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>Code</Th>
-                      <Th isNumeric>Section</Th>
-                      <Th isNumeric>Credit</Th>
-                      {/* <Th isNumeric>Room</Th> */}
-                      <Th>Timings</Th>
-                      <Th>Actions</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody></Tbody>
-                </Table>
-              </TableContainer>
+              {advisingLoading ? (
+                <Center py="24">
+                  <Spinner color="green.500" />
+                </Center>
+              ) : (
+                <TableContainer>
+                  <Table variant="simple" size="sm">
+                    <Thead>
+                      <Tr>
+                        <Th>Code</Th>
+                        <Th isNumeric>Section</Th>
+                        <Th isNumeric>Credit</Th>
+                        <Th>Timings</Th>
+                        <Th>Actions</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {advisings.map((advising) => (
+                        <AdvisingRow
+                          advising={advising}
+                          key={advising._id}
+                          getCourses={getRecommendedCourses}
+                          getAdvisings={getAdvisings}
+                        />
+                      ))}
+                    </Tbody>
+                    <TableCaption>
+                      <Text fontWeight="bold" fontSize="16">
+                        Total credits taken:{" "}
+                        {advisings.reduce((acc, ad) => acc + ad.course.credit, 0)}
+                      </Text>
+                    </TableCaption>
+                  </Table>
+                </TableContainer>
+              )}
             </Box>
           </GridItem>
         </Grid>

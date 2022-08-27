@@ -19,3 +19,10 @@ export interface Course {
   labStart: string | null;
   labEnd: string | null;
 }
+
+export interface Advising {
+  _id: string;
+  studentId: string;
+  courseId: string;
+  course: Course;
+}
