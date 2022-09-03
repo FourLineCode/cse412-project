@@ -47,7 +47,7 @@ export function AdvisingCourseRow({
       toast({
         title: data.message,
         status: "error",
-        duration: 3000,
+        duration: 5000,
         isClosable: false,
       });
     }
