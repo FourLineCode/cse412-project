@@ -153,11 +153,11 @@ export default function StudentSignInPage() {
           </VStack>
         </FormControl>
         <HStack spacing="3" py="3">
-          <Box h="0.5" bg="gray.500" w="100%" />
-          <Text fontSize="12" fontWeight="bold" color="gray.500">
+          <Box h="0.5" bg="gray.300" w="100%" />
+          <Text fontSize="12" fontWeight="bold" color="gray.300">
             OR
           </Text>
-          <Box h="0.5" bg="gray.500" w="100%" />
+          <Box h="0.5" bg="gray.300" w="100%" />
         </HStack>
         <VStack spacing="3">
           <Button

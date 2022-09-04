@@ -32,10 +32,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Check if same course already taken (course id or code)
     for (const advising of advisings) {
       if ((advising.courseId as ObjectId).toString() === courseId) {
-        return res.status(400).json({ success: false, message: "Course already taken!" });
+        return res
+          .status(400)
+          .json({ success: false, message: `Already added the course ${course.code}!` });
       }
       if (advising.course.code === course.code) {
-        return res.status(400).json({ success: false, message: "Course already taken!" });
+        return res
+          .status(400)
+          .json({ success: false, message: `Already added the course ${course.code}!` });
       }
     }
 
