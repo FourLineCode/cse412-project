@@ -139,10 +139,11 @@ export function UserCard({ user, getUsers }: { user: User; getUsers: () => Promi
     <HStack
       px="4"
       py="2"
-      bg="gray.800"
+      bg="gray.100"
+      _dark={{ bg: "gray.800" }}
       rounded="md"
       cursor="pointer"
-      _hover={{ bg: "gray.700" }}
+      _hover={{ opacity: 0.75 }}
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >

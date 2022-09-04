@@ -185,6 +185,8 @@ export default function StudentCalculatorPage() {
                 <NumberInput value={currCGPA} w="100%" min={0} max={4}>
                   <FormLabel htmlFor="cgpa">Current CGPA</FormLabel>
                   <NumberInputField
+                    min={0}
+                    max={4}
                     name="cgpa"
                     placeholder="Current CGPA..."
                     value={currCGPA}
@@ -194,6 +196,7 @@ export default function StudentCalculatorPage() {
                 <NumberInput value={currCredit} w="100%" min={0} max={200}>
                   <FormLabel htmlFor="credit">Current Credit</FormLabel>
                   <NumberInputField
+                    min={0}
                     name="credit"
                     placeholder="Current Credits..."
                     value={currCredit}
