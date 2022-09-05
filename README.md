@@ -2,7 +2,7 @@
 
 ### Check out the Preview on - [advising-portal.vercel.app](https://advising-portal.vercel.app)
 
-### Build with -
+## Build with -
 
 - [Next.js](https://nextjs.org/)
 - [React.js](https://reactjs.org/)
