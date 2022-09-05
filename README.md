@@ -2,7 +2,7 @@
 
 ### Check out the Preview on - [advising-portal.vercel.app](https://advising-portal.vercel.app)
 
-## Build with -
+### Build with -
 
 - [Next.js](https://nextjs.org/)
 - [React.js](https://reactjs.org/)
@@ -16,6 +16,10 @@
 ### Why use MongoDB
 
 <img width="1080" src=".github/images/mongo-vs-postgres.png" >
+
+### Stress test
+
+<img width="1080" src=".github/images/stress.png" >
 
 ### Our lighthouse performance scores
 
