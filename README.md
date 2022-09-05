@@ -1,4 +1,6 @@
-# CSE412 (Software Engineering) Mini Project
+# Student Advising Portal
+
+- CSE412 (Software Engineering) Mini Project
 
 ### Check out the Preview on - [advising-portal.vercel.app](https://advising-portal.vercel.app)
 
